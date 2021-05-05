@@ -1,0 +1,85 @@
+using System;
+using System.Diagnostics;
+
+namespace bubblesort Noel
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var tid = new System.Diagnostics.Stopwatch();
+            double btid;
+            double itid;
+            int[] lista=new int[1000];
+            random1(lista);
+            tid.Start();
+            Bubblesort(lista);
+            tid.Stop();
+            btid = tid.Elapsed.TotalSeconds;
+            for(int i=0;i<lista.Length; i++) 
+            {
+                Console.Write(lista[i]);
+            }
+            tid.Reset();
+            random1(lista);
+            tid.Start();
+            Insertion(lista);
+            tid.Stop();
+            for (int i = 0; i < lista.Length; i++)
+            {
+                Console.Write(lista[i]);
+            }
+            Inserttid = tid.Elapsed.TotalSeconds;
+            Console.WriteLine("Tid för Bubblesort " + btid);
+            Console.WriteLine("Tid för Insertionsort " + itid);
+        }
+
+        public static void random1(int[] lista) 
+        {
+            Random random = new Random();
+            int r;
+            for(int i = 0; i < lista.Length; i++) 
+            {
+                r = random.Next(1, 10);
+                lista[i] = r;
+            }
+        }
+
+        public static void Bubblesort (int[] lista) 
+        {
+            for (int m=lista.Length-1 ; m>0; m--) 
+            {
+                for (int n=0; n<m; n++) 
+                {
+                    if (lista[n]> lista[n + 1]) 
+                    {
+                        int temp = lista [n];
+                        lista[n] = lista[n + 1];
+                        lista[n + 1] = temp;
+                    }
+                }
+            }
+        }
+
+        public static void Insertion (int [] lista) 
+        {
+            int i, n;
+            int length = lista.Length; if (length < 2) return;
+            int temp;
+
+            for (n=1; n<length; n++) 
+            {
+                temp = lista[n];
+                i = n - 1;
+
+                while (i>=0 && lista[i] > temp) 
+                {
+                    lista[i + 1] = lista[i];
+                    i--;
+                }
+
+                lista[i + 1] = temp;
+            }
+        }
+    }
+}
